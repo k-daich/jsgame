@@ -4,7 +4,7 @@
  * Audioを使いやすくしたSoundクラス
  * Gameクラスから呼び出して使うので、普段は使わない
  */
-class Sound extends Audio {
+export class Sound extends Audio {
 
     /**
      * 引数

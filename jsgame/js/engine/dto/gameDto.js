@@ -3,7 +3,7 @@
 /**
  * データの保持を行うクラス
  */
-class GameDto {
+export class GameDto {
 
     // 当クラスのインスタンスフィールド
     static me;

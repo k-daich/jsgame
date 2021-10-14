@@ -1,9 +1,10 @@
 'use strict'
+import {DataObserver} from '/jsgame/js/debug/dataObserver.js'
 
 /**
  * パーティに関してのクラス
  */
-class Party {
+export class Party {
 	/**
 	 * 引数には、パーティのメンバーを制限なく入れることができる
 	 */

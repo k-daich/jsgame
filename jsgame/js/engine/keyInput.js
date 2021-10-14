@@ -3,7 +3,7 @@
 /**
  * キー入力のクラス
  */
-class KeyInput {
+export class KeyInput {
 
 	// 当クラスのインスタンスフィールド
 	static input;

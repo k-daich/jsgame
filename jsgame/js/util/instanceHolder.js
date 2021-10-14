@@ -1,9 +1,10 @@
 'use strict'
+import {Party} from '/jsgame/js/engine/party.js'
 
 /**
  * インスタンスを保持しておくクラス
  */
-class InstanceHolder {
+export class InstanceHolder {
 
     static party;
 

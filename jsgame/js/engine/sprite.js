@@ -1,9 +1,10 @@
 'use strict'
+import {DataObserver} from '/jsgame/js/debug/dataObserver.js'
 
 /**
  * スプライトに関してのクラス
  */
-class Sprite {
+export class Sprite {
 
 	/**
 	 * 引数

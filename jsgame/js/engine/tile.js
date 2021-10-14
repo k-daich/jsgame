@@ -1,9 +1,10 @@
 'use strict'
+import {Sprite} from '/jsgame/js/engine/sprite.js'
 
 /**
  * タイルに関してのクラス
  */
-class Tile extends Sprite {
+export class Tile extends Sprite {
 
 	/**
 	 * 引数

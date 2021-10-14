@@ -1,9 +1,15 @@
 'use strict'
+import {DataObserver} from '/jsgame/js/debug/dataObserver.js'
+import {Tile} from '/jsgame/js/engine/tile.js'
+import {Text} from '/jsgame/js/engine/text.js'
+import {Game} from '/jsgame/js/engine/game.js'
+import {GameDto} from '/jsgame/js/engine/dto/gameDto.js'
+import {InstanceHolder} from '/jsgame/js/util/instanceHolder.js'
 
 /**
  * タイルマップに関するクラス
  */
-class Tilemap {
+export class Tilemap {
 	//タイルのサイズ
 	TILE_SIZE = 32;
 	//歩く速さ

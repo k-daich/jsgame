@@ -1,4 +1,16 @@
 'use strict'
+import {dataObserver as dObs2} from '/jsgame/js/debug/dataObserver2.js'
+import {DataObserver} from '/jsgame/js/debug/dataObserver.js'
+import {Game} from '/jsgame/js/engine/game.js'
+import {Scene} from '/jsgame/js/engine/scene.js'
+import {Text} from '/jsgame/js/engine/text.js'
+import {Tile} from '/jsgame/js/engine/tile.js'
+import {Tilemap} from '/jsgame/js/engine/tilemap.js'
+import {KeyInput} from '/jsgame/js/engine/keyInput.js'
+import {CharacterTile} from '/jsgame/js/engine/characterTile.js'
+import {InstanceHolder} from '/jsgame/js/util/instanceHolder.js'
+import {GameDto} from '/jsgame/js/engine/dto/gameDto.js'
+import {map} from '/jsgame/js/map.js'
 
 //ブラウザがページを完全に読みこむまで待つ
 addEventListener('load', () => {
@@ -7,7 +19,6 @@ addEventListener('load', () => {
 	const game = new Game();
 	// 画像データのプリロードを実施する
 	game.preload('/jsgame/img/yamada.png', '/jsgame/img/rico.png', '/jsgame/img/aru.png', '/jsgame/img/start.png', '/jsgame/img/goal.png', '/jsgame/img/tile.png', '/jsgame/img/dpad.png', '/jsgame/sound/bgm.mp3', '/jsgame/sound/start.mp3', '/jsgame/sound/clear.mp3');
-
 	//ゲームを開始する準備ができたあとに実行する
 	game.main(() => {
 		//タイトルシーン
@@ -17,6 +28,7 @@ addEventListener('load', () => {
 			const scene = new Scene();
 			//変数titleTextに、あなたは「title scene」というテキストだよ、と教える
 			const titleText = new Text('title scene');
+
 			//テキストを上下左右中央の位置にする
 			titleText.center().middle();
 			//シーンにテキストを追加
@@ -24,7 +36,7 @@ addEventListener('load', () => {
 
 			//ループから常に呼び出される
 			scene.onenterframe = () => {
-				DataObserver.observeObject(KeyInput.getInput(), false);
+				dObs2.observeObject(KeyInput.getInput(), false);
 				//スペースキーが押されたとき、メインシーンに切り替える
 				if (KeyInput.getInput().space) {
 					Game.add('main', mainScene());
@@ -73,8 +85,10 @@ addEventListener('load', () => {
 			//変数goalに、あなたはゴールのタイルですよ、と教える
 			const goal = new Tile('goal', '/jsgame/img/goal.png');
 			//マップ左上からの座標を指定する
-			goal.x = tilemap.TILE_SIZE*98;
-			goal.y = tilemap.TILE_SIZE*98;
+			goal.x = tilemap.TILE_SIZE*3;
+			goal.y = tilemap.TILE_SIZE*3;
+			// goal.x = tilemap.TILE_SIZE*98;
+			// goal.y = tilemap.TILE_SIZE*98;
 			//ゴールのタイルを、tilemapに追加して、とお願いする
 			tilemap.add(goal);
 
@@ -114,6 +128,7 @@ addEventListener('load', () => {
 
 			// タイルマップのデバッグ用観察設定
 			DataObserver.setup(tilemap);
+			dObs2.setup(tilemap);
 
 			//ループから常に呼び出される
 			scene.onenterframe = () => {
@@ -136,6 +151,7 @@ addEventListener('load', () => {
 		//gameに、シーンを追加して、とお願いする
 		Game.add('title', titleScene());
 		Game.add('main', mainScene());
+		dObs2.observe('test', true);
 
 		//gameに、ゲームをスタートして、とお願いする
 		game.start();

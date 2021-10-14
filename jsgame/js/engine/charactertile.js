@@ -1,9 +1,11 @@
 'use strict'
+import {Tile} from '/jsgame/js/engine/tile.js'
+import {DataObserver} from '/jsgame/js/debug/dataObserver.js'
 
 /**
  * キャラクタータイルに関するクラス
  */
-class CharacterTile extends Tile {
+export class CharacterTile extends Tile {
 
 	/**
 	 * 引数

@@ -3,7 +3,7 @@
 /**
  * テキストに関してのクラス
  */
-class Text {
+export class Text {
 
 	/**
 	 * 引数

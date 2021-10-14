@@ -1,9 +1,13 @@
 'use strict'
+import {GameDto} from '/jsgame/js/engine/dto/gameDto.js'
+import {KeyInput} from '/jsgame/js/engine/keyInput.js'
+import {Sound} from '/jsgame/js/engine/sound.js'
+import {Scene} from '/jsgame/js/engine/scene.js'
 
 /**
  * ゲームづくりの基本となるクラス
  */
-class Game {
+export class Game {
 
 	/**
 	 * コンストラクタ
