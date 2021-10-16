@@ -84,7 +84,7 @@ export class Sprite {
 	 * 引数
 	 * canvas : 紙（キャンバス）
 	 */
-	 update( canvas ) {
+	update( canvas ) {
 		DataObserver.observe('update()@sprite.js', false);
 		//画像などを画面に表示するためのメソッドを呼び出す
 		this.render( canvas );
@@ -98,6 +98,6 @@ export class Sprite {
 	/**
 	 * 常に呼び出され、スプライトの移動やイベントの発生などに使うメソッド。空なのはオーバーライド（上書き）して使うため
 	 */
-	 onenterframe() {}
+	onenterframe() {}
 
 }

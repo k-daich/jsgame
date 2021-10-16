@@ -30,7 +30,7 @@ export class Tile extends Sprite {
 	 * 引数
 	 * tile : 重なっているかを判定したいタイル
 	 */
-	 isOverlapped( tile ) {
+	isOverlapped( tile ) {
 		//引数がTileのとき
 		if ( tile instanceof Tile ) {
 			//タイル同士が重なっているかどうか

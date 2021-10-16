@@ -1,0 +1,79 @@
+@startuml
+title Class Diagram
+entity "Main" {
+  {field} - Game : game
+  {method} + Scene : mainScene()
+  {method} + Scene : titleScene()
+}
+entity "Game" {
+  {method} + void : constructor(width, height)
+  {method} + void : add(name, scene)
+  {method} + void : setup()
+  {method} + void : preload()
+  {method} + void : main(callback)
+  {method} + void : start()
+}
+entity "Sprite" {
+  {method} + Sprite : constructor( name, img, width, height )
+  {method} + void : render( canvas )
+  {method} + void : preload()
+  {method} + void : update( canvas )
+  {abstract} {method} + void : onenterframe()
+}
+entity "Tile" {
+  {method} + Tile : constructor( name, img, size )
+  {method} + boolean : isOverlapped( tile )
+}
+entity "CharacterTile" {
+  {method} + CharacterTile : constructor( name , img, size )
+  {method} + void : render( canvas )
+}
+entity "Scene" {
+  {field} + Object[] : objs
+  {method} + void : add( obj )
+  {method} + void : update( canvas )
+  {abstract} {method} + void : onenterframe()
+  {abstract} {method} + void : onchangescene()
+}
+entity "titleScene" {
+  {field} + Text : titleText
+  {field} + Scene : scene
+}
+entity "mainScene" {
+  {field} + Tilemap : tileMap
+  {field} + Tile : start
+  {field} + Tile : goal
+  {field} + Party : party
+  {field} + CharacterTile : yamada
+  {field} + CharacterTile : rico
+  {field} + CharacterTile : aru
+  {field} + Scene : scene
+}
+entity "Sound" {
+  {method} + void : constructor(src)
+  {method} + void : start()
+  {method} + void : loop()
+  {method} + void : stop()
+}
+entity "Text" {
+  {method} + void : constructor( text )
+  {method} + void : center()
+  {method} + void : middle()
+  {method} + void : update( canvas )
+  {method} + void : render( canvas, ctx )
+  {method} + void : onenterframe()
+}
+
+Sprite <|-- Tile
+Tile <|-- CharacterTile
+Audio <|-- Sound
+Scene <|.. titleScene
+Scene <|.. mainScene
+
+Main ..> Game
+Game ..> Scene
+Game ..> Sound
+mainScene ..> CharacterTile
+mainScene ..> Tile
+titleScene ..> Text
+@enduml

@@ -15,7 +15,7 @@ export class Game {
 	 * height : ゲームの縦幅
 	 */
 	constructor(width, height) {
-		this.setup();
+		this.#setup();
 
 		// canvas要素を作成
 		GameDto.setCanvas(document.createElement('canvas'));
@@ -44,7 +44,7 @@ export class Game {
 	/**
 	 * ゲームに関する初期設定処理を行う（主にstaticオブジェクトの生成）
 	 */
-	setup() {
+	#setup() {
 		// GameDtoのインスタンスを作成
 		GameDto.createInstance();
 		// キー入力の初期設定を行う
@@ -156,7 +156,7 @@ export class Game {
 	/**
 	 * ユーザーからの操作を待つためのメソッド
 	 */
-	 _waitUserManipulation() {
+	_waitUserManipulation() {
 		//すべての音声を再生する
 		const _playAllSounds = e => {
 			//デフォルトのイベントを発生させない
