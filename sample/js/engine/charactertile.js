@@ -1,6 +1,6 @@
 'use strict'
-import {Tile} from '/jsgame/js/engine/tile.js'
-import {DataObserver} from '/jsgame/js/debug/dataObserver.js'
+import {Tile} from '/jsgame/sample/js/engine/tile.js'
+import {DataObserver} from '/jsgame/sample/js/debug/dataObserver.js'
 
 /**
  * キャラクタータイルに関するクラス

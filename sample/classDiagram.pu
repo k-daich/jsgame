@@ -1,5 +1,5 @@
 @startuml
-title Class Diagram
+title Class Diagram[jsgame]
 entity "Main" {
   {field} - Game : game
   {method} + Scene : mainScene()

@@ -1,5 +1,5 @@
 'use strict'
-import {DataObserver} from '/jsgame/js/debug/dataObserver.js'
+import {DataObserver} from '/jsgame/sample/js/debug/dataObserver.js'
 
 /**
  * パーティに関してのクラス

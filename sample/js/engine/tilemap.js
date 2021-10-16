@@ -1,10 +1,10 @@
 'use strict'
-import {DataObserver} from '/jsgame/js/debug/dataObserver.js'
-import {Tile} from '/jsgame/js/engine/tile.js'
-import {Text} from '/jsgame/js/engine/text.js'
-import {Game} from '/jsgame/js/engine/game.js'
-import {GameDto} from '/jsgame/js/engine/dto/gameDto.js'
-import {InstanceHolder} from '/jsgame/js/util/instanceHolder.js'
+import {DataObserver} from '/jsgame/sample/js/debug/dataObserver.js'
+import {Tile} from '/jsgame/sample/js/engine/tile.js'
+import {Text} from '/jsgame/sample/js/engine/text.js'
+import {Game} from '/jsgame/sample/js/engine/game.js'
+import {GameDto} from '/jsgame/sample/js/engine/dto/gameDto.js'
+import {InstanceHolder} from '/jsgame/sample/js/util/instanceHolder.js'
 
 /**
  * タイルマップに関するクラス
@@ -127,9 +127,9 @@ export class Tilemap {
 					//移動ができないようにする
 					this.tiles['player'].isMovable = false;
 					//bgm.mp3をストップ
-					GameDto.getSounds()[ '/jsgame/sound/bgm.mp3' ].stop();
+					GameDto.getSounds()[ '/jsgame/sample/sound/bgm.mp3' ].stop();
 					//clear.mp3を再生
-					GameDto.getSounds()[ '/jsgame/sound/clear.mp3' ].start();
+					GameDto.getSounds()[ '/jsgame/sample/sound/clear.mp3' ].start();
 					// 5秒たったら、タイトルシーンに切り替える
 					setTimeout( () => {
 						DataObserver.observe(`update() => setTimeout()@tilemap.js , flg : ${this.isSwitchedScene}` , true);

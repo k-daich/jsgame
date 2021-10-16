@@ -1,5 +1,5 @@
 'use strict'
-import {Party} from '/jsgame/js/engine/party.js'
+import {Party} from '/jsgame/sample/js/engine/party.js'
 
 /**
  * インスタンスを保持しておくクラス

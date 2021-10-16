@@ -1,5 +1,5 @@
 'use strict'
-import {Sprite} from '/jsgame/js/engine/sprite.js'
+import {Sprite} from '/jsgame/sample/js/engine/sprite.js'
 
 /**
  * タイルに関してのクラス

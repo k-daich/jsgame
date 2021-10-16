@@ -1,7 +1,7 @@
 'use strict'
-import {Sprite} from '/jsgame/js/engine/sprite.js'
-import {Tilemap} from '/jsgame/js/engine/tilemap.js'
-import {Text} from '/jsgame/js/engine/text.js'
+import {Sprite} from '/jsgame/sample/js/engine/sprite.js'
+import {Tilemap} from '/jsgame/sample/js/engine/tilemap.js'
+import {Text} from '/jsgame/sample/js/engine/text.js'
 
 /**
  * シーンに関してのクラス

@@ -1,32 +1,33 @@
 'use strict'
-import {Tilemap} from '/jsgame/js/engine/tilemap.js'
+import {Tilemap} from '/jsgame/sample/js/engine/tilemap.js'
 
 /**
  * データ観察のためのクラス
  */
-export class DataObserver {
-
-    static isOutput;
-    static tilemap;
+export var dataObserver = {
+    tilemap : '',
+    count : 0,
 
     /**
      * コンストラクタ
      * @param {*} tilemap 観察対象のタイルマップ
      */
-    static setup ( tilemap ) {
+    setup : function ( tilemap ) {
         this.tilemap = tilemap;
-        this.count = 0;
-    }
+    },
 
-    static countup () {
+    /**
+     * カウントアップ
+     */
+     countup : function () {
         this.count++;
-    }
+    },
 
-    static observe ( locateName , isOutput ){
+    observe : function ( locateName , isOutput ){
         if(isOutput) console.log(`【${this.count}/${locateName}】tilemap.y : ${this.tilemap.y} , tilemap.vy : ${this.tilemap.vy}`);
-    }
+    },
 
-    static observeObject ( input , isOutput ){
+    observeObject : function ( input , isOutput ){
         if(isOutput) {
             console.log(`【${this.count}】`);
             console.log(input);

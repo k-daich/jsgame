@@ -1,16 +1,16 @@
 'use strict'
-import {dataObserver as dObs2} from '/jsgame/js/debug/dataObserver2.js'
-import {DataObserver} from '/jsgame/js/debug/dataObserver.js'
-import {Game} from '/jsgame/js/engine/game.js'
-import {Scene} from '/jsgame/js/engine/scene.js'
-import {Text} from '/jsgame/js/engine/text.js'
-import {Tile} from '/jsgame/js/engine/tile.js'
-import {Tilemap} from '/jsgame/js/engine/tilemap.js'
-import {KeyInput} from '/jsgame/js/engine/keyInput.js'
-import {CharacterTile} from '/jsgame/js/engine/characterTile.js'
-import {InstanceHolder} from '/jsgame/js/util/instanceHolder.js'
-import {GameDto} from '/jsgame/js/engine/dto/gameDto.js'
-import {map} from '/jsgame/js/map.js'
+import {dataObserver as dObs2} from '/jsgame/sample/js/debug/dataObserver2.js'
+import {DataObserver} from '/jsgame/sample/js/debug/dataObserver.js'
+import {Game} from '/jsgame/sample/js/engine/game.js'
+import {Scene} from '/jsgame/sample/js/engine/scene.js'
+import {Text} from '/jsgame/sample/js/engine/text.js'
+import {Tile} from '/jsgame/sample/js/engine/tile.js'
+import {Tilemap} from '/jsgame/sample/js/engine/tilemap.js'
+import {KeyInput} from '/jsgame/sample/js/engine/keyInput.js'
+import {CharacterTile} from '/jsgame/sample/js/engine/characterTile.js'
+import {InstanceHolder} from '/jsgame/sample/js/util/instanceHolder.js'
+import {GameDto} from '/jsgame/sample/js/engine/dto/gameDto.js'
+import {map} from '/jsgame/sample/js/map.js'
 
 //ブラウザがページを完全に読みこむまで待つ
 addEventListener('load', () => {
@@ -18,7 +18,7 @@ addEventListener('load', () => {
 	//変数gameに、あなたはゲームですよ、と教える
 	const game = new Game();
 	// 画像データのプリロードを実施する
-	game.preload('/jsgame/img/yamada.png', '/jsgame/img/rico.png', '/jsgame/img/aru.png', '/jsgame/img/start.png', '/jsgame/img/goal.png', '/jsgame/img/tile.png', '/jsgame/img/dpad.png', '/jsgame/sound/bgm.mp3', '/jsgame/sound/start.mp3', '/jsgame/sound/clear.mp3');
+	game.preload('/jsgame/sample/img/yamada.png', '/jsgame/sample/img/rico.png', '/jsgame/sample/img/aru.png', '/jsgame/sample/img/start.png', '/jsgame/sample/img/goal.png', '/jsgame/sample/img/tile.png', '/jsgame/sample/img/dpad.png', '/jsgame/sample/sound/bgm.mp3', '/jsgame/sample/sound/start.mp3', '/jsgame/sample/sound/clear.mp3');
 	//ゲームを開始する準備ができたあとに実行する
 	game.main(() => {
 		//タイトルシーン
@@ -47,9 +47,9 @@ addEventListener('load', () => {
 			scene.onchangescene = () => {
 				KeyInput.initInputFlg();
 				//clear.mp3をストップ
-				GameDto.getSounds()[ '/jsgame/sound/clear.mp3' ].stop();
+				GameDto.getSounds()[ '/jsgame/sample/sound/clear.mp3' ].stop();
 				//start.mp3を再生
-				GameDto.getSounds()[ '/jsgame/sound/start.mp3' ].start();
+				GameDto.getSounds()[ '/jsgame/sample/sound/start.mp3' ].start();
 				alert('Titleシーン');
 			}
 
@@ -63,7 +63,7 @@ addEventListener('load', () => {
 			const scene = new Scene();
 
 			//変数tilemapに、あなたはタイルマップですよ、と教える
-			const tilemap = new Tilemap('/jsgame/img/tile.png');
+			const tilemap = new Tilemap('/jsgame/sample/img/tile.png');
 			//tilemap.dataに、どんなマップなのか教える
 			tilemap.data = map;
 			//マップ全体の位置をずらす
@@ -75,7 +75,7 @@ addEventListener('load', () => {
 			scene.add(tilemap);
 
 			//変数startに、あなたはスタートのタイルですよ、と教える
-			const start = new Tile('start', '/jsgame/img/start.png');
+			const start = new Tile('start', '/jsgame/sample/img/start.png');
 			//マップ左上からの座標を指定する
 			start.x = tilemap.TILE_SIZE * 1;
 			start.y = tilemap.TILE_SIZE * 2;
@@ -83,7 +83,7 @@ addEventListener('load', () => {
 			tilemap.add(start);
 
 			//変数goalに、あなたはゴールのタイルですよ、と教える
-			const goal = new Tile('goal', '/jsgame/img/goal.png');
+			const goal = new Tile('goal', '/jsgame/sample/img/goal.png');
 			//マップ左上からの座標を指定する
 			goal.x = tilemap.TILE_SIZE*3;
 			goal.y = tilemap.TILE_SIZE*3;
@@ -93,7 +93,7 @@ addEventListener('load', () => {
 			tilemap.add(goal);
 
 			//変数yamadaに、あなたは山田先生のキャラクタータイルですよ、と教える
-			const yamada = new CharacterTile('player', '/jsgame/img/yamada.png');
+			const yamada = new CharacterTile('player', '/jsgame/sample/img/yamada.png');
 			//山田先生を画面の中央に配置
 			yamada.x = yamada.y = tilemap.TILE_SIZE * 5 - tilemap.TILE_SIZE / 2;
 			//タイルマップの動きと同期させない
@@ -102,7 +102,7 @@ addEventListener('load', () => {
 			tilemap.add(yamada);
 
 			//変数ricoに、あなたはりこちゃんのキャラクタータイルですよ、と教える
-			const rico = new CharacterTile('rico', '/jsgame/img/rico.png');
+			const rico = new CharacterTile('rico', '/jsgame/sample/img/rico.png');
 			//りこちゃんの位置を決める
 			rico.x = tilemap.TILE_SIZE * 6 - tilemap.TILE_SIZE / 2;
 			rico.y = tilemap.TILE_SIZE * 5 - tilemap.TILE_SIZE / 2;
@@ -112,7 +112,7 @@ addEventListener('load', () => {
 			tilemap.add(rico);
 
 			// 変数aruに、あなたはアルくんのキャラクタータイルですよ、と教える
-			const aru = new CharacterTile('aru', '/jsgame/img/aru.png');
+			const aru = new CharacterTile('aru', '/jsgame/sample/img/aru.png');
 			// アルくんの位置を決める
 			aru.x = tilemap.TILE_SIZE * 7 - tilemap.TILE_SIZE / 2;
 			aru.y = tilemap.TILE_SIZE * 5 - tilemap.TILE_SIZE / 2;
@@ -138,9 +138,9 @@ addEventListener('load', () => {
 			scene.onchangescene = () => {
 				KeyInput.initInputFlg();
 				//start.mp3をストップ
-				GameDto.getSounds()[ '/jsgame/sound/start.mp3' ].stop();
+				GameDto.getSounds()[ '/jsgame/sample/sound/start.mp3' ].stop();
 				//bgm.mp3をループ再生
-				GameDto.getSounds()[ '/jsgame/sound/bgm.mp3' ].loop();
+				GameDto.getSounds()[ '/jsgame/sample/sound/bgm.mp3' ].loop();
 				alert('Mainシーン');
 			}
 
