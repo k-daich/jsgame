@@ -1,0 +1,38 @@
+@startuml
+title Class Diagram[jsgame]
+
+entity "Main" {
+	{method} + void : addEventListener('load', ())
+	{method} + void : mainLoop()
+}
+entity "Preloader" {
+	{field}  - Promise[] : #preloadPromises
+	{method} + void : constructor(_assets...)
+	{method} + void : executeWhenComp(callback)
+}
+entity "Renderer" {
+	{field}  - static Canvas : canvas
+	{method} + static void : setup(width, height)
+	{method} - static void : #addResizeEvent()
+}
+
+entity "Sounds" {
+	{field}  - static Sound{filePath, sound} : sounds
+	{method} + void : add(filePath, sound)
+	{method} + Sound : get(filePath)
+}
+entity "KeyInput" {
+	{field}  - static boolean{} : input
+	{field}  - static String{} : keys
+	{method} - void : setEventListener()
+}
+entity "CommonFrame" {
+	{field}  - Output : label
+	{field}  - Range : Sound Volume BGM
+	{field}  - Range : Sound Volume Effect
+	{field}  - Button : Quit
+}
+
+Main ..> Preloader
+Main ..> Renderer
+@enduml

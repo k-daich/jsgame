@@ -1,0 +1,52 @@
+@startuml
+title UI Specification[choque]
+entity "CommonFrame" {
+  {field} Output : label
+  {field} Range : Sound Volume BGM
+  {field} Range : Sound Volume Effect
+  {field} Button : Quit
+}
+entity "TitleScreen" {
+  {field} Select : Play
+  {field} Select : Settings
+  {method} goIntroScreen()
+  {method} goSettingScreen()
+}
+entity "IntroScreen" {
+  {field} Check : Words of 1st～12th Grade
+  {field} Select : difficulty
+}
+entity "GameMainFrame" {
+  {field} Output : charaFace
+  {field} Output : partnerPanel[6]
+  {field} Output : conversation
+  {field} Select : choices
+}
+entity "MainWindow" {
+  {field} Output : player
+  {field} Output : partner
+  {field} Output : enemy1
+  {field} Output : enemy2
+  {field} Output : enemy3
+  {field} Output : conversation
+}
+entity "MapWindow" {
+  {field} Output : player
+  {field} Output : icon[enemy/dungion/town]
+  {field} Outpu : tileMap
+}
+entity "StatusWindow" {
+  {field} Output : yuccho HP/MAXHP
+}
+
+CommonFrame <|.. TitleScreen 
+CommonFrame <|.. IntroScreen
+GameMainFrame <|.. EventScreen
+GameMainFrame <|.. BattleScreen
+StatusArea ..* GameMainFrame
+MapWindow ..* GameMainFrame
+TitleScreen ..> IntroScreen
+IntroScreen ..> EventScreen
+EventScreen <..> BattleScreen
+
+@enduml
