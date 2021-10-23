@@ -64,10 +64,12 @@ export class KeyInput {
 					case 'keydown':
 						//押されたキーが、登録されたキーの中に存在するとき、inputのそのキーをtrueにする
 						if (e.key === this._keys[key]) this.input[key] = true;
+						console.log(`keydown ${e.key}`);
 						break;
 					case 'keyup':
 						//押されたキーが、登録されたキーの中に存在するとき、inputのそのキーをfalseにする
 						if (e.key === this._keys[key]) this.input[key] = false;
+						console.log(`keyup ${e.key}`);
 						break;
 				}
 			}

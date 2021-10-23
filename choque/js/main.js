@@ -1,6 +1,7 @@
 'use strict'
 import { Renderer } from '/jsgame/choque/js/engine/renderer.js'
 import { Preloader } from '/jsgame/choque/js/engine/preloader.js'
+import { KeyInput } from '/jsgame/choque/js/engine/keyInput.js'
 
 /**
  * 処理の開始点
@@ -26,9 +27,12 @@ addEventListener('load', () => {
 
 	// プリロード完了後にメインループ処理を開始する
 	preloader.executeWhenComp(() => {
+		// キー入力の定義を来ぬ
+		KeyInput.setKeyEvents();
 		console.log('start');
 		mainLoop();
 	});
+	
 	// 初期画面を表示する
 	// プリロードを実施する
 	// メニュー項目を表示する
