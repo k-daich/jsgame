@@ -6,7 +6,6 @@ import { KeyInput } from '/jsgame/choque/js/engine/keyInput.js'
 /**
  * 処理の開始点
  */
-
 // ブラウザがページを完全に読み込み後に実施する
 addEventListener('load', () => {
 	// 画面Canvasの初期化設定を行う
@@ -23,7 +22,7 @@ addEventListener('load', () => {
 		, '/jsgame/sample/sound/clear.mp3'
 	);
 	// 画面Canvasの初期化設定を行う
-	Renderer.setup(480, 320);
+	Renderer.setup(240, 160);
 
 	// プリロード完了後にメインループ処理を開始する
 	preloader.executeWhenComp(() => {
@@ -41,5 +40,8 @@ addEventListener('load', () => {
 // メインループ処理
 const mainLoop = () => {
 	console.log('main loop');
+	// 画面をupdateする
+	Renderer.update();
+	// 均一なフレーム単位で処理を実施させる
 	requestAnimationFrame(mainLoop.bind(mainLoop));
 }

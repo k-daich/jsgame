@@ -1,6 +1,11 @@
 @startuml
 title Class Diagram[jsgame]
 
+entity "KeyInput" {
+	{field}  - static boolean{} : input
+	{field}  - static String{} : keys
+	{method} - void : setEventListener()
+}
 entity "Main" {
 	{method} + void : addEventListener('load', ())
 	{method} + void : mainLoop()
@@ -15,24 +20,50 @@ entity "Renderer" {
 	{method} + static void : setup(width, height)
 	{method} - static void : #addResizeEvent()
 }
-
 entity "Sounds" {
 	{field}  - static Sound{filePath, sound} : sounds
 	{method} + void : add(filePath, sound)
 	{method} + Sound : get(filePath)
 }
-entity "KeyInput" {
-	{field}  - static boolean{} : input
-	{field}  - static String{} : keys
-	{method} - void : setEventListener()
+entity "Sound" {
+	{method} + Sound : constructor(src)
+	{method} + Sound : start()
+	{method} + Sound : loop()
+	{method} + Sound : stop()
 }
-entity "CommonFrame" {
-	{field}  - Output : label
-	{field}  - Range : Sound Volume BGM
-	{field}  - Range : Sound Volume Effect
-	{field}  - Button : Quit
+entity "Audio" {
+}
+entity "Scenes" {
+	{field}  - Scene : scenes[]
+	{method} + void : switchScene(name)
+	{method} + void : addScene(name, scene)
+	{method} + Scene : getCurrentScene()
+}
+entity "Scene" {
+	{method} + Scene : constructor()
+	{method} + void : add(obj)
+	{method} + void : update(canvas)
+	{method} + void : onenterframe()
+	{method} + void : onchangescene()
+}
+entity "Text" {
+	{method} + Text : constructor()
+	{method} + Text : center()
+	{method} + Text : middle()
+	{method} + void : update( canvas )
+	{method} + void : render( canvas, ctx )
+	{method} + void : onenterframe()
+}
+entity "ChoiceFrame" {
+	{field}  - TextBox : choice1
+
+	{method} + void : bindKey()
 }
 
-Main ..> Preloader
 Main ..> Renderer
+Main ..> Preloader
+Preloader ..> Sounds
+Sound *.. Sounds
+Audio <|.. Sound
+Scene *.. Scenes
 @enduml

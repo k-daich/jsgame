@@ -30,7 +30,7 @@ export class Scene {
 	 * 引数
 	 * canvas : 紙（キャンバス）
 	 */
-	update( canvas ) {
+	update() {
 		//スプライトを動かしたり、なにかのきっかけでイベントを発生させたりするために使うメソッドを呼び出す
 		this.onenterframe();
 	}

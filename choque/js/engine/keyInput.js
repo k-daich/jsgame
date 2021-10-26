@@ -1,11 +1,13 @@
 'use strict'
+
 /**
- * 
+ * キー入力のクラス
  */
 export class KeyInput {
 
-	// 当クラスのインスタンスフィールド
+	// キー入力マップ（キー名：キー押下フラグ）
 	static #input = {};
+	// キー定義（キー名：キー物理名）
 	static keys = {
 		up: 'ArrowUp',
 		down: 'ArrowDown',
@@ -17,6 +19,13 @@ export class KeyInput {
 		s: 's',
 		d: 'd',
 	};
+
+	/**
+	 * キー入力の初期設定を行う
+	 */
+	static isKeydown(name) {
+		return this.#input[name];
+	}
 
 	/**
 	 * キー入力の初期設定を行う
@@ -40,26 +49,27 @@ export class KeyInput {
 			// F5,F12はそのまま実施する
 			if(e.key === 'F5'
 				|| e.key === 'F12') return;
-			//デフォルトのイベントを発生させない
+			// デフォルトのイベントを発生させない
 			e.preventDefault();
-			//keysに登録された数だけ繰り返す
+			// keysに登録された数だけ繰り返す
 			for ( let key in this.keys ) {
 				//イベントのタイプによって呼び出すメソッドを変える
 				switch ( e.type ) {
 					case 'keydown' :
-						//押されたキーが、登録されたキーの中に存在するとき、inputのそのキーをtrueにする
+						// 押されたキーが、登録されたキーの中に存在するとき、inputのそのキーをtrueにする
 						if ( e.key === this.keys[key] ) {
 							this.#input[key] = true;
 							console.log(`keydown ${e.key}`);
 						}
 						break;
 					case 'keyup' :
-						//押されたキーが、登録されたキーの中に存在するとき、inputのそのキーをfalseにする
+						// 押されたキーが、登録されたキーの中に存在するとき、inputのそのキーをfalseにする
 						if ( e.key === this.keys[key] ) {
 							this.#input[key] = false;
 							console.log(`keyup ${e.key}`);	
 						}
 						break;
+					default : break;
 				}
 			}
 		}
