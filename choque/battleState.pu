@@ -1,0 +1,34 @@
+@startuml
+title State Graph[battle]
+
+state init {
+	init : chara setting
+}
+
+state whichFirst {
+	whichFirst : judge first attack side
+}
+
+init --> whichFirst
+whichFirst --> ownTern : own
+whichFirst --> enemyTern : enemy
+
+state ownTern {
+	ownCommandWait --> ownChoiceWait
+	ownChoiceWait --> ownChoiced
+}
+state enemyTern {
+	enemyCommandWait --> enemyChoiceWait
+	enemyChoiceWait --> enemyChoiced
+}
+
+ownTern --> enemyTern : alive
+ownTern --> fin : dead
+enemyTern --> ownTern : alive
+enemyTern --> fin : dead
+
+state fin {
+
+}
+
+@enduml

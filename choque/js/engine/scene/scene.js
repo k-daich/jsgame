@@ -11,15 +11,29 @@ export class Scene {
 	 */
 	constructor() {
 		this.objs = [];
+		this.frontObjs = [];
 	}
 
 	/**
-	 * シーンにオブジェクトを追加するときに呼び出されるメソッド
+	 * シーンの先頭にオブジェクトを追加する
 	 *
 	 * 引数
 	 * obj : スプライトやテキストなど（オブジェクト）
 	 */
-	add(obj) {
+	unshift(obj) {
+		//引数がSceneObjのとき、this.objsの末尾にobjを追加
+		if (obj instanceof SceneObj) this.objs.unshift(obj);
+		//引数がSprite、Text、Tilemapでなければ、コンソールにエラーを表示
+		else console.error('Sceneに追加できるのはSceneObjだけだよ！');
+	}
+
+	/**
+	 * シーンの末尾にオブジェクトを追加する
+	 *
+	 * 引数
+	 * obj : スプライトやテキストなど（オブジェクト）
+	 */
+	push(obj) {
 		//引数がSceneObjのとき、this.objsの末尾にobjを追加
 		if (obj instanceof SceneObj) this.objs.push(obj);
 		//引数がSprite、Text、Tilemapでなければ、コンソールにエラーを表示
@@ -27,21 +41,22 @@ export class Scene {
 	}
 
 	/**
-	 * Gameクラスのメインループからずっと呼び出され続ける
+	 * シーンの末尾にオブジェクトを追加する
+	 *
+	 * 引数
+	 * frontObj : スプライトやテキストなど（オブジェクト）
 	 */
-	update() {
-		// スプライトを動かしたり、なにかのきっかけでイベントを発生させたりするために使うメソッドを呼び出す
-		this.onenterframe();
+	pushFrontObj(obj) {
+		//引数がSceneObjのとき、this.objsの末尾にobjを追加
+		if (obj instanceof SceneObj) this.frontObjs.push(obj);
+		//引数がSprite、Text、Tilemapでなければ、コンソールにエラーを表示
+		else console.error('Sceneに追加できるのはSceneObjだけだよ！');
 	}
 
 	/**
-	 * 常に呼び出され、スプライトの移動やイベントの発生などに使うメソッド。空なのはオーバーライド（上書き）して使うため
+	 * すべてのオブジェクトを結合した配列を返す
 	 */
-	onenterframe() { }
-
-	/**
-	 * シーンが切り替わったときに呼び出される
-	 */
-	onchangescene() { }
-
+	getAllObjs() {
+		return this.frontObjs.concat(this.objs);
+	}
 }

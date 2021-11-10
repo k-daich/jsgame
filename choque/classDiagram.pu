@@ -15,10 +15,21 @@ entity "Preloader" {
 	{method} + void : constructor(_assets...)
 	{method} + void : executeWhenComp(callback)
 }
+entity "MyCanvas" {
+	{method} + void : setup(width, height)
+}
+entity "Controler" {
+	{method} + void : update()
+}
+entity "Model" {
+	{method} + void : execute()		
+}
 entity "Renderer" {
 	{field}  - static Canvas : canvas
-	{method} + static void : setup(width, height)
-	{method} - static void : #addResizeEvent()
+	{method} + void : update()
+	{method} - void : #addResizeEvent()
+	{method} - void : #initRender()
+	{method} - abstract void : #mainRender()
 }
 entity "Sounds" {
 	{field}  - static Sound{filePath, sound} : sounds
@@ -54,16 +65,19 @@ entity "Text" {
 	{method} + void : render( canvas, ctx )
 	{method} + void : onenterframe()
 }
-entity "ChoiceFrame" {
-	{field}  - TextBox : choice1
 
-	{method} + void : bindKey()
-}
-
-Main ..> Renderer
+Main ..> Controler
+Controler ..> Model
+Controler ..> Renderer
 Main ..> Preloader
 Preloader ..> Sounds
 Sound *.. Sounds
 Audio <|.. Sound
-Scene *.. Scenes
+Scenes *.. Scene 
+Scene *.. Text
+Scene *.. TextBox
+Model <|.. StartModel
+Model <|.. BattleModel
+Renderer <|.. StartRenderer
+Renderer <|.. BattleRenderer
 @enduml

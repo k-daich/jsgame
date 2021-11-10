@@ -12,18 +12,19 @@ export class Text extends SceneObj {
 	 * 引数
 	 * text : 表示する文字列
 	 */
-	constructor(text) {
+	constructor(text, x, y) {
 		super();
 		//this.textに表示する文字列を代入
 		this.text = text;
 		//デフォルトのフォントを指定
 		this.font = Constants.MAIN_FONT;
 		//テキストを表示する位置
-		this.x = this.y = 0;
-		//数値によってテキストを移動させることができる（移動速度）
-		this.vx = this.vy = 0;
-		//テキストのベースラインの位置
-		this.baseline = 'top';
+		this.x = x;
+		this.y = y;
+		// テキストの揃えラインの位置を変更
+		this.textAlign = 'center';
+		// テキストのベースラインの位置を変更
+		this.baseline = 'middle';
 		//テキストのサイズ
 		this.size = 20;
 		//テキストの色
@@ -71,40 +72,46 @@ export class Text extends SceneObj {
 		return this;
 	}
 
+	/**
+	 * 枠線の色を設定する
+	 */
+	fontSize(size) {
+		// 枠線の色を設定する
+		this.size = size;
+		return this;
+	}
+
 	/**Gameクラスのメインループからずっと呼び出され続ける
 	 *
 	 * 引数
 	 * canvas : 紙（キャンバス）
 	 */
-	update(canvas) {
-		//画家さん（コンテキスト）を呼ぶ
-		const _ctx = canvas.getContext('2d');
+	update(canvas, ctx) {
+		// テキストの太さ、サイズ、フォントを設定
+		ctx.font = `${this.weight} ${this.size}px ${this.font}`;
+		// テキストの色を設定
+		ctx.fillStyle = this.fontColor;
+		// テキストの揃えラインの位置を変更
+		ctx.textAlign = this.textAlign;
+		// テキストのベースラインの位置を設定
+		ctx.textBaseline = this.baseline;
 
-		//テキストの太さ、サイズ、フォントを設定
-		_ctx.font = `${this.weight} ${this.size}px ${this.font}`;
-		//テキストの色を設定
-		_ctx.fillStyle = this.fontColor;
-		//テキストのベースラインの位置を設定
-		_ctx.textBaseline = this.baseline;
+		// テキストの幅を計算
+		this._width = ctx.measureText(this.text).width;
+		// テキストの高さを計算
+		this._height = Math.abs(ctx.measureText(this.text).actualBoundingBoxAscent)
+			+ Math.abs(ctx.measureText(this.text).actualBoundingBoxDescent);
 
-		//テキストの幅を計算
-		this._width = _ctx.measureText(this.text).width;
-		//テキストの高さを計算
-		this._height = Math.abs(_ctx.measureText(this.text).actualBoundingBoxAscent) + Math.abs(_ctx.measureText(this.text).actualBoundingBoxDescent);
-
-		//テキストを左右中央に配置したいときの、X座標の計算
-		if (this._isCenter) this.x = (canvas.width - this._width) / 2;
+		// テキストを左右中央に配置したいときの、X座標の計算
+		if (this._isCenter) this.x = (canvas.width) / 2;
 		//テキストを上下中央に配置したいときの、Y座標の計算
 		if (this._isMiddle) this.y = canvas.height / 2;
 
 		//画像などを画面に表示するためのメソッドを呼び出す
-		this.render(canvas, _ctx);
+		this.render(canvas, ctx);
 		//テキストを動かしたりするために使うメソッドを呼び出す
 		this.onenterframe();
 
-		//テキストを移動する
-		this.x += this.vx;
-		this.y += this.vy;
 	}
 
 	/**

@@ -5,7 +5,14 @@
  */
 export class Constants {
 	// フォント（メイン）
-	MAIN_FONT = "游ゴシック体, 'Yu Gothic', YuGothic, sans-serif";
+	static MAIN_FONT = "游ゴシック体, 'Yu Gothic', YuGothic, sans-serif";
 	// フォントサイズ（メイン）
-	MAIN_FONT_SIZE = 20;
+	static MAIN_FONT_SIZE = 20;
+
+	static CHOICE_INDEX = {
+		UPPER: 0,
+		LEFT: 1,
+		RIGHT: 2,
+	}
+
 }

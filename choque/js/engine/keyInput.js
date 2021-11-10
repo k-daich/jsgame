@@ -18,6 +18,7 @@ export class KeyInput {
 		a: 'a',
 		s: 's',
 		d: 'd',
+		p: 'p',
 	};
 
 	/**
@@ -25,6 +26,14 @@ export class KeyInput {
 	 */
 	static isKeydown(name) {
 		return this.#input[name];
+	}
+
+	/**
+	 * キー入力を押下されていない扱いにする
+	 * （押しっぱなしでも１回の押下判定とするための対応）
+	 */
+	static setKeyFalse(name) {
+		this.#input[name] = false;
 	}
 
 	/**

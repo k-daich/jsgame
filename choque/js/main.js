@@ -1,12 +1,17 @@
 'use strict'
-import { Renderer } from '/jsgame/choque/js/engine/renderer.js'
+import { MyCanvas } from '/jsgame/choque/js/engine/myCanvas.js'
+import { Controler } from '/jsgame/choque/js/engine/controler.js'
 import { Preloader } from '/jsgame/choque/js/engine/preloader.js'
 import { KeyInput } from '/jsgame/choque/js/engine/keyInput.js'
+import { Xysize } from '/jsgame/choque/js/engine/constants/xysize.js'
 
+// コントローラの処理を実施する
+const controler = new Controler();
+let count = 0;
 /**
  * 処理の開始点
+ * ブラウザがページを完全に読み込み後に実施する
  */
-// ブラウザがページを完全に読み込み後に実施する
 addEventListener('load', () => {
 	// 画面Canvasの初期化設定を行う
 	let preloader = new Preloader(
@@ -22,7 +27,7 @@ addEventListener('load', () => {
 		, '/jsgame/sample/sound/clear.mp3'
 	);
 	// 画面Canvasの初期化設定を行う
-	Renderer.setup(240, 160);
+	MyCanvas.setup(Xysize.CANVAS_WIDTH, Xysize.CANVAS_HEIGHT);
 
 	// プリロード完了後にメインループ処理を開始する
 	preloader.executeWhenComp(() => {
@@ -31,7 +36,7 @@ addEventListener('load', () => {
 		console.log('start');
 		mainLoop();
 	});
-	
+
 	// 初期画面を表示する
 	// プリロードを実施する
 	// メニュー項目を表示する
@@ -39,9 +44,9 @@ addEventListener('load', () => {
 
 // メインループ処理
 const mainLoop = () => {
-	console.log('main loop');
-	// 画面をupdateする
-	Renderer.update();
+	//console.log('main loop : ' + count++);
+	// コントローラの処理を実施する
+	controler.update();
 	// 均一なフレーム単位で処理を実施させる
 	requestAnimationFrame(mainLoop.bind(mainLoop));
 }
