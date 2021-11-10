@@ -108,8 +108,12 @@ export class ThinkTextBox extends SceneObj {
 	 * ctx : 画家（コンテキスト）
 	 */
 	render(ctx) {
-		//テキストの色を設定
-		ctx.fillStyle = this.ftColor;
+
+		// 背景色の指定がある場合
+		if (this.bgColor) {
+			//テキストの色を設定
+			ctx.fillStyle = this.bgColor;
+		}
 		// 矩形の枠線の色を設定する
 		ctx.strokeStyle = this.bdrColor;
 		//テキストの太さ、サイズ、フォントを設定
@@ -127,6 +131,8 @@ export class ThinkTextBox extends SceneObj {
 		ctx.beginPath();
 		ctx.arc(this.cx, this.cy / ratio, this.innerRadiusX, 0, Math.PI * 180, true);
 		ctx.fill();
+		//テキストの色を設定
+		ctx.fillStyle = this.ftColor;
 		ctx.setTransform(1, 0, 0, 1, 0, 0);
 
 		// メインの線を描く
@@ -148,12 +154,6 @@ export class ThinkTextBox extends SceneObj {
 		}
 		ctx.strokeStyle = this.strokeStyle;
 		ctx.stroke();
-
-		// 背景色の指定がある場合
-		if (this.bgColor) {
-			//テキストの色を設定
-			ctx.fillStyle = this.bgColor;
-		}
 
 	}
 	/*

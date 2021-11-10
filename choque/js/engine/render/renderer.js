@@ -14,7 +14,7 @@ export let Renderer = {
 		// 左上から、画面のサイズまでを、塗りつぶす
 		MyCanvas.ctx.fillRect(0, 0, MyCanvas.canvas.width, MyCanvas.canvas.height);
 		// 開発用に網目背景にする
-		this.drawMeshBack();
+		//this.drawMeshBack();
 	},
 
 	/**
@@ -74,7 +74,7 @@ export let Renderer = {
 	 * 画面をUpdateする
 	 */
 	update: function() {
-		console.log(this.scene.getAllObjs());
+		//console.log(this.scene.getAllObjs());
 
 		// 全てのオブジェクトの数だけ繰り返す
 		for (let _obj of this.scene.getAllObjs()) {

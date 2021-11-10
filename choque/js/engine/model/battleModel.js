@@ -22,6 +22,7 @@ export let BattleModel = {
 	state: BattleState.INIT,
 	countDownTimer: null,
 	mainChara: new MainChara(5, 5),
+	thinkText: null,
 }
 
 /**
@@ -50,11 +51,17 @@ BattleModel.execute = function() {
 			BattleModel.ansTimeLim = 3;
 			//1秒間隔で３回カウントダウンするタイマーを生成する
 			BattleModel.countDownTimer = new Timer(1000, 3);
+			// 思考テキストを設定する
+			BattleModel.thinkText = 'which first';
 			// クイズ未設定時はクイズ描画のため後続実行せずに返す
 			return '';
 		case BattleState.WHICH_FIRST:
 			// 先攻を決定する（一旦、自分が先攻に固定）
-			BattleModel.state = BattleState.OWN_COMMAND_WAIT;
+			if (KeyInput.isKeydown('space')) {
+				KeyInput.setKeyFalse('space');
+				BattleModel.thinkText = null;
+				BattleModel.state = BattleState.OWN_COMMAND_WAIT;
+			}
 			return ''
 		case BattleState.OWN_COMMAND_WAIT:
 			// コマンドインデックスのデフォルト値（中央コマンドの値）
@@ -113,15 +120,15 @@ BattleModel.execute = function() {
 			this.result = this.ansTimeLim;
 			return '';
 		case BattleState.OWN_CHOICED:
-			if (KeyInput.isKeydown('space')) {
-				KeyInput.setKeyFalse('space');
-				BattleModel.state = BattleState.FIN;
-			}
 			BattleModel.countDownTimer.stop();
 			// 選択インデックスと答えインデックスが一致する場合
 			if (this.choIndex === this.ansIndex) {
 				this.result = '正解';
-				//				correctAction();
+				// 選択のカウントダウン開始
+				BattleModel.countDownTimer.repeat(BattleModel.countDownTimer, () => {
+					// カウントダウンする
+					BattleModel.state = BattleState.FIN;
+				});
 			}
 			// 一致していない場合
 			else {

@@ -36,25 +36,12 @@ BattleRenderer.mainRender = function(model) {
 			BattleRenderer.renderOwnChoiceWait(model);
 			underBoxText = model.q3[model.ansIndex].mean;
 			break;
+		// 選択済み時
+		case BattleState.OWN_CHOICED:
+			//BattleRenderer.renderOwnChoiced(model);
+			underBoxText = model.result;
+			break;
 	}
-
-	BattleRenderer.scene.push(
-	new ThinkTextBox(
-			underBoxText,
-			30,
-			40,
-			10,
-			20,
-			30,
-			10,
-			10,
-			10,
-			15,
-			5,5)
-			.borderColor(Color.WHITE)
-			.fontColor(Color.WHITE)
-			.fontSize(10)
-	);
 
 	// 以降、状態関係なく描画するもの
 	// 下部ボックスの設定
@@ -78,6 +65,38 @@ BattleRenderer.mainRender = function(model) {
 			.color(Color.WHITE)
 			.fontSize(16)
 	);
+	// 思考テキストがある場合
+	if (model.thinkText) {
+		BattleRenderer.scene.push(
+			new ThinkTextBox(
+				// テキスト
+				model.thinkText,
+				// 横半径
+				25,
+				// 縦半径
+				40,
+				// 角数
+				50,
+				// 円の中心座標X
+				40,
+				// 円の中心座標Y
+				50,
+				// 中の円横半径
+				22,
+				// 中の円縦半径
+				35,
+				// 外側の線のはみ出す上限
+				5,
+				// 内側の線のはみ出す上限
+				5,
+			)
+				.borderColor(Color.WHITE)
+				.fontColor(Color.WHITE)
+				.fontSize(10)
+				.backColor(Color.BLACK)
+		);
+
+	}
 }
 
 BattleRenderer.renderOwnCommandWait = function(model) {
